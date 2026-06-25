@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Filter, ChevronDown } from "lucide-react";
 import ProductCard from "@/components/public/product-card";
 import { publicApi } from "@/lib/api";
 import { Product, Category, Brand } from "@/types";
-import { Button } from "@/components/ui/button";
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -92,7 +90,9 @@ export default function ProductsPage() {
         >
           <option value="">All Categories</option>
           {categories.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
           ))}
         </select>
 
@@ -103,7 +103,9 @@ export default function ProductsPage() {
         >
           <option value="">All Brands</option>
           {brands.map((b) => (
-            <option key={b.id} value={b.id}>{b.name}</option>
+            <option key={b.id} value={b.id}>
+              {b.name}
+            </option>
           ))}
         </select>
 
@@ -174,5 +176,32 @@ export default function ProductsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-[1200px] mx-auto px-6 py-10">
+          <div className="mb-8">
+            <div className="h-10 bg-gray-200 rounded w-64 mb-2 animate-pulse" />
+            <div className="h-4 bg-gray-200 rounded w-32 animate-pulse" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-gray-200 rounded-xl aspect-[3/4] mb-3" />
+                <div className="h-3 bg-gray-200 rounded w-16 mb-2" />
+                <div className="h-4 bg-gray-200 rounded w-32 mb-2" />
+                <div className="h-4 bg-gray-200 rounded w-20" />
+              </div>
+            ))}
+          </div>
+        </div>
+      }
+    >
+      <ProductsContent />
+    </Suspense>
   );
 }
