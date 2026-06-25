@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+@import "tailwindcss";
+
+/* ... rest of your CSS (variables, layers, etc.) stays the same ... */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 40 30% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 20% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 38 42% 58%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
+    --ring: 38 42% 58%;
+    --radius: 0.5rem;
+    --gold: #C4A265;
+  }
+}
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+}
+
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #bbb; }
