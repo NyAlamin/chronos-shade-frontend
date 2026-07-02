@@ -103,10 +103,7 @@ export default function AdminBrandsPage() {
           </h2>
           <p className="text-sm text-gray-500">{brands.length} brands</p>
         </div>
-        <Button
-          onClick={openAdd}
-          className="gap-1.5 bg-[#1a1a1a] hover:bg-[#333]"
-        >
+        <Button onClick={openAdd} className="gap-1.5 bg-[#1a1a1a] hover:bg-[#333] text-white">
           <Plus size={16} /> Add Brand
         </Button>
       </div>

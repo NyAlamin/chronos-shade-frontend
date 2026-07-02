@@ -111,7 +111,7 @@ export default function AdminSettingsPage() {
         </Section>
 
         <div className="flex justify-end">
-          <Button type="submit" disabled={saving} size="lg" className="gap-2 bg-[#1a1a1a] hover:bg-[#333]">
+          <Button type="submit" disabled={saving} size="lg" className="gap-1.5 bg-[#1a1a1a] hover:bg-[#333] text-white">
             <Save size={16} /> {saving ? "Saving..." : "Save Settings"}
           </Button>
         </div>
