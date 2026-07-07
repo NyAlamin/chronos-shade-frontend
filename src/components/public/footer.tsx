@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
-            <h3 className="font-display text-2xl font-bold text-white mb-3">
+            <h3 className="font-display text-2xl font-bold text-[#C4A265] mb-3">
               Purai Joss
             </h3>
             <p className="text-sm leading-relaxed mb-5 max-w-[300px]">
