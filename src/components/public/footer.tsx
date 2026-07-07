@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
             <h3 className="font-display text-2xl font-bold text-white mb-3">
-              Chronos <span className="text-[#C4A265]">&</span> Shade
+              Purai <span className="text-[#C4A265]">&</span> Joss
             </h3>
             <p className="text-sm leading-relaxed mb-5 max-w-[300px]">
               Premium watches and designer sunglasses. Curated for those who
