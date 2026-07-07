@@ -114,7 +114,7 @@ export default function HomePage() {
       )}
 
       {/* Dual CTA Banners */}
-      <section className="max-w-[1200px] mx-auto px-6 py-20">
+      {/* <section className="max-w-[1200px] mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="bg-gradient-to-br from-[#1a1a2e] to-[#0f3460] rounded-2xl p-12">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#C4A265] mb-3">
@@ -151,7 +151,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Metal Wall Art Section */}
       <section className="max-w-[1200px] mx-auto px-6 pb-20">
@@ -202,7 +202,7 @@ export default function HomePage() {
         </section>
       )}
 
-      <Newsletter />
+      {/* <Newsletter /> */}
     </>
   );
 }
