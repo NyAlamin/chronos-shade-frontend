@@ -35,6 +35,7 @@ export default function Navbar() {
               { label: "Shop", href: "/products" },
               { label: "Watches", href: "/products?categoryId=1" },
               { label: "Sunglasses", href: "/products?categoryId=2" },
+              { label: "Metal Wall Art", href: "/products?categoryId=3" },
               { label: "New Arrivals", href: "/products?sortBy=newest" },
             ].map((item) => (
               <Link

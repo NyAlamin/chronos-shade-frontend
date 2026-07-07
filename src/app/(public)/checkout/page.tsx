@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -18,11 +18,12 @@ export default function CheckoutPage() {
   const { items, clearCart } = useCartStore();
   const [submitting, setSubmitting] = useState(false);
   const [order, setOrder] = useState<Order | null>(null);
+  const [settings, setSettings] = useState<Record<string, string>>({});
   const router = useRouter();
 
-  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
-  const shipping = subtotal >= 500 ? 0 : 60;
-  const total = subtotal + shipping;
+  useEffect(() => {
+    publicApi.getSettings().then(setSettings).catch(() => {});
+  }, []);
 
   const {
     register,
@@ -36,6 +37,15 @@ export default function CheckoutPage() {
   });
 
   const paymentMethod = watch("paymentMethod");
+  const district = watch("district");
+
+  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const freeMin = Number(settings.freeShippingMin) || 500;
+  const shippingDhaka = Number(settings.shippingDhaka) || 60;
+  const shippingOutside = Number(settings.shippingOutside) || 120;
+  const isDhaka = district?.toLowerCase().includes("dhaka");
+  const shipping = subtotal >= freeMin ? 0 : isDhaka ? shippingDhaka : shippingOutside;
+  const total = subtotal + shipping;
 
   const onSubmit = async (data: CheckoutFormData) => {
     if (items.length === 0) {
@@ -64,7 +74,6 @@ export default function CheckoutPage() {
     setSubmitting(false);
   };
 
-  // Order confirmation
   if (order) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-6">
@@ -130,13 +139,11 @@ export default function CheckoutPage() {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10"
       >
-        {/* Form */}
         <div>
           <h3 className="text-lg font-bold text-[#1a1a1a] mb-5">
             Delivery Information
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Name */}
             <div className="sm:col-span-2">
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Full Name *
@@ -157,7 +164,6 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* Phone */}
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Phone Number *
@@ -178,7 +184,6 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* Email */}
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Email (Optional)
@@ -195,7 +200,6 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* Address */}
             <div className="sm:col-span-2">
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Delivery Address *
@@ -216,7 +220,6 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* District */}
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 District / City *
@@ -235,9 +238,11 @@ export default function CheckoutPage() {
                   {errors.district.message}
                 </p>
               )}
+              <p className="text-[11px] text-gray-400 mt-1">
+                Shipping varies: {formatPrice(shippingDhaka)} inside Dhaka, {formatPrice(shippingOutside)} outside. Free over {formatPrice(freeMin)}.
+              </p>
             </div>
 
-            {/* Postal Code */}
             <div>
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Postal Code
@@ -249,7 +254,6 @@ export default function CheckoutPage() {
               />
             </div>
 
-            {/* Notes */}
             <div className="sm:col-span-2">
               <label className="text-xs font-semibold text-gray-500 mb-1.5 block">
                 Additional Notes
@@ -263,7 +267,6 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Payment Method */}
           <h3 className="text-lg font-bold text-[#1a1a1a] mt-8 mb-4">
             Payment Method
           </h3>
@@ -293,7 +296,6 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Order Summary */}
         <div className="bg-[#faf9f6] rounded-2xl p-7 self-start lg:sticky lg:top-24">
           <h3 className="text-lg font-bold text-[#1a1a1a] mb-5">
             Order Summary
@@ -330,7 +332,11 @@ export default function CheckoutPage() {
             </div>
             <div className="flex justify-between text-sm text-gray-500">
               <span>Shipping</span>
-              <span>{shipping === 0 ? "Free" : formatPrice(shipping)}</span>
+              <span>
+                {shipping === 0
+                  ? "Free"
+                  : `${formatPrice(shipping)} ${isDhaka ? "(Dhaka)" : "(Outside Dhaka)"}`}
+              </span>
             </div>
             <div className="flex justify-between text-lg font-bold text-[#1a1a1a] pt-3 border-t border-gray-200">
               <span>Total</span>

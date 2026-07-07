@@ -17,22 +17,27 @@ export default function AdminSettingsPage() {
   });
 
   useEffect(() => {
-    adminApi.getSettings().then((s: Record<string, string>) => {
-      reset({
-        storeName: s.storeName || "Chronos & Shade",
-        tagline: s.tagline || "",
-        phone: s.phone || "",
-        email: s.email || "",
-        address: s.address || "",
-        facebook: s.facebook || "",
-        instagram: s.instagram || "",
-        twitter: s.twitter || "",
-        youtube: s.youtube || "",
-        freeShippingMin: s.freeShippingMin || "500",
-        currency: s.currency || "BDT",
-        currencySymbol: s.currencySymbol || "৳",
-      });
-    }).catch(() => {});
+    adminApi
+      .getSettings()
+      .then((s: Record<string, string>) => {
+        reset({
+          storeName: s.storeName || "Chronos & Shade",
+          tagline: s.tagline || "",
+          phone: s.phone || "",
+          email: s.email || "",
+          address: s.address || "",
+          facebook: s.facebook || "",
+          instagram: s.instagram || "",
+          twitter: s.twitter || "",
+          youtube: s.youtube || "",
+          freeShippingMin: s.freeShippingMin || "500",
+          shippingDhaka: s.shippingDhaka || "60",
+          shippingOutside: s.shippingOutside || "120",
+          currency: s.currency || "BDT",
+          currencySymbol: s.currencySymbol || "৳",
+        });
+      })
+      .catch(() => {});
   }, [reset]);
 
   const onSubmit = async (data: SettingsFormData) => {
@@ -100,13 +105,50 @@ export default function AdminSettingsPage() {
         </Section>
 
         <Section icon={<Truck size={18} />} title="Shipping & Currency">
-          <div className="grid grid-cols-3 gap-4">
-            <div><label className="text-xs font-semibold text-gray-500 mb-1 block">Free Shipping Min (৳)</label>
-              <input {...register("freeShippingMin")} className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]" /></div>
-            <div><label className="text-xs font-semibold text-gray-500 mb-1 block">Currency Code</label>
-              <input {...register("currency")} className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]" /></div>
-            <div><label className="text-xs font-semibold text-gray-500 mb-1 block">Currency Symbol</label>
-              <input {...register("currencySymbol")} className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]" /></div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                Free Shipping Minimum (৳)
+              </label>
+              <input
+                {...register("freeShippingMin")}
+                placeholder="500"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]"
+              />
+              <p className="text-[11px] text-gray-400 mt-1">
+                Orders above this amount get free shipping. Set 0 to disable.
+              </p>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                Shipping Charge - Inside Dhaka (৳)
+              </label>
+              <input
+                {...register("shippingDhaka")}
+                placeholder="60"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                Shipping Charge - Outside Dhaka (৳)
+              </label>
+              <input
+                {...register("shippingOutside")}
+                placeholder="120"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">
+                Currency Symbol
+              </label>
+              <input
+                {...register("currencySymbol")}
+                placeholder="৳"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#C4A265]"
+              />
+            </div>
           </div>
         </Section>
 

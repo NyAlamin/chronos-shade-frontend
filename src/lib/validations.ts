@@ -119,6 +119,8 @@ export const settingsSchema = z.object({
   twitter: z.string().optional(),
   youtube: z.string().optional(),
   freeShippingMin: z.string().optional(),
+  shippingDhaka: z.string().optional(),
+  shippingOutside: z.string().optional(),
   currency: z.string().optional(),
   currencySymbol: z.string().optional(),
 });

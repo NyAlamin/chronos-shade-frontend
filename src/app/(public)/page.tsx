@@ -153,6 +153,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Metal Wall Art Section */}
+      <section className="max-w-[1200px] mx-auto px-6 pb-20">
+        <div className="bg-gradient-to-br from-[#0a0a0a] to-[#2a2a2a] rounded-2xl p-12 text-center">
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#C4A265] mb-3">
+            New Category
+          </p>
+          <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">
+            Metal Wall Art
+          </h3>
+          <p className="text-white/50 text-sm mb-8 max-w-md mx-auto">
+            Transform your space with our handcrafted metal wall art pieces.
+            Bold designs that make a statement.
+          </p>
+          <Link
+            href="/products?categoryId=3"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#C4A265] text-[#1a1a1a] rounded-lg text-sm font-bold hover:bg-[#b8964e] transition"
+          >
+            Explore Collection <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
       {/* All Products */}
       {products.length > 0 && (
         <section className="max-w-[1200px] mx-auto px-6 pb-20">
