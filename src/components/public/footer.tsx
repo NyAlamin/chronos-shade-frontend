@@ -28,8 +28,8 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div>
-            <h3 className="font-display text-2xl font-bold text-white mb-3">
-              Chronos <span className="text-[#C4A265]">&</span> Shade
+            <h3 className="font-display text-2xl font-bold text-[#C4A265] mb-3">
+              Purai Joss
             </h3>
             <p className="text-sm leading-relaxed mb-5 max-w-[300px]">
               Premium watches and designer sunglasses. Curated for those who
@@ -102,7 +102,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-          <p>© 2026 Chronos & Shade. All rights reserved.</p>
+          <p>© 2026 Purai Joss. All rights reserved.</p>
           <div className="flex gap-3">
             {["bKash", "Nagad", "VISA", "COD"].map((m) => (
               <span

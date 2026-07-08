@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Chronos & Shade — Premium Watches & Sunglasses",
+  title: "Purai Joss — Premium Watches & Sunglasses",
   description:
     "Shop premium watches and designer sunglasses. Curated for those who value quality and style.",
 };
